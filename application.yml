@@ -30,8 +30,8 @@ spec:
         - name: nginx
           image: library/nginx:1.23.2
           ports:
-           - name: nginx
-             containerPort: 80
+            - name: nginx
+              containerPort: 80
           volumeMounts:
             - name: nginx-content
               mountPath: /usr/share/nginx/html
@@ -50,8 +50,8 @@ spec:
   selector:
     app: nginx
   ports:
-  - protocol: TCP
-    port: 80
+    - protocol: TCP
+      port: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -64,16 +64,16 @@ metadata:
     external-dns.alpha.kubernetes.io/target: traefik.codemowers.ee
 spec:
   rules:
-  - host: nginx-3nk45yqd6e.codemowers.ee
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: nginx
-            port:
-              number: 80
+    - host: msergo-nginx-argo.codemowers.ee
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: nginx
+                port:
+                  number: 80
   tls:
-  - hosts:
-    - "*.codemowers.ee"
+    - hosts:
+        - "*.codemowers.ee"
